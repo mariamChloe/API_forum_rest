@@ -3,6 +3,8 @@ package com.example.API.REST.FORUM.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,5 +20,13 @@ public class Sujet {
 
     @Column(name = "Theme")
     private String theme;
+
+    @ManyToOne
+    @JoinColumn(name = "forum_id")
+    private Forum forum;
+
+
+    @OneToMany(mappedBy = "sujet")
+    private Set<Message> messages;
 
 }
