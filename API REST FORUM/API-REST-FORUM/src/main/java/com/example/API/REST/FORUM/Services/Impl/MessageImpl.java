@@ -1,5 +1,6 @@
 package com.example.API.REST.FORUM.Services.Impl;
 
+import com.example.API.REST.FORUM.Repository.MessageRepository;
 import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
 import com.example.API.REST.FORUM.Services.DTO.MessageDTO;
 import com.example.API.REST.FORUM.Services.MessageService;
@@ -14,6 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class MessageImpl implements MessageService {
+    private final MessageService messageService;
+    private final MessageRepository messageRepository;
     @Override
     public ForumDTO save(MessageDTO messageDTO) {
         return null;
