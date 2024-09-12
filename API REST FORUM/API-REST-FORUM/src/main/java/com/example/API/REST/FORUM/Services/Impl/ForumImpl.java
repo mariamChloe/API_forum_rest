@@ -1,7 +1,10 @@
 package com.example.API.REST.FORUM.Services.Impl;
 
+import com.example.API.REST.FORUM.Model.Forum;
+import com.example.API.REST.FORUM.Repository.ForumRepository;
 import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
+import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,9 +15,17 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 public class ForumImpl implements ForumService {
+
+    private final ForumRepository forumRepository;
+    private final ForumMapper forumMapper;
+
     @Override
     public ForumDTO save(ForumDTO forumDTO) {
-        return null;
+        log.debug("Resqurst to save : {}",forumDTO);
+        Forum forum = forumMapper.toEntity(forumDTO);
+        forum= forumRepository.save(forum);
+
+        return  forumMapper.fromEntity(forum);
     }
 
     @Override

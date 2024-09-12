@@ -22,4 +22,9 @@ public class Message {
     @Column(name = "Date")
     private String date;
 
+
+    @ManyToOne
+    @JoinColumn(name = "sujet_id")
+    private Sujet sujet;
+
 }
