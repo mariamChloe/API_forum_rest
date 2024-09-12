@@ -1,11 +1,16 @@
 package com.example.API.REST.FORUM.web.ressources;
 
 import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
+import com.example.API.REST.FORUM.Services.DTO.MessageDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +29,12 @@ public class ForumRessource {
         log.debug(" REST Request to save forum {}",forumDTO);
         ForumDTO forum = forumService.save(forumDTO);
         return new ResponseEntity<>(forum, HttpStatus.CREATED);
+    }
+
+     @GetMapping
+    public List<ForumDTO> getAllForum(){
+        log.debug("REST Request to all Forum  ");
+        return forumService.getAll();
     }
 
 }

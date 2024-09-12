@@ -7,5 +7,4 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface SujetMapper extends EntityMapper<SujetDTO, Sujet>{
 
-    SujetDTO toDto(Sujet sujet);
 }
