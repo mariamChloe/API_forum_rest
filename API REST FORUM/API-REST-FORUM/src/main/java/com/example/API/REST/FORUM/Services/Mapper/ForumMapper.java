@@ -6,4 +6,6 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface ForumMapper extends EntityMapper<ForumDTO, Forum>{
+
+    ForumDTO toDto(Forum forum);
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface MessageService {
 
-    ForumDTO save(MessageDTO messageDTO);
+    MessageDTO save(MessageDTO messageDTO);
     List<MessageDTO> getAll();
     Optional<MessageDTO> findOne(Long id);
 }

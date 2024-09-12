@@ -8,6 +8,8 @@ public class ApiRestForumApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ApiRestForumApplication.class, args);
+
+		
 	}
 
 }
