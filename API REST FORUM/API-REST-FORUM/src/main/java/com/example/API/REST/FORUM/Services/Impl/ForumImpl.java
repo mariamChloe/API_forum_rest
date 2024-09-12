@@ -1,11 +1,14 @@
 package com.example.API.REST.FORUM.Services.Impl;
 
+import com.example.API.REST.FORUM.Model.Forum;
+import com.example.API.REST.FORUM.Repository.ForumRepository;
 import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
 import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import com.example.API.REST.FORUM.Model.Forum;
 import com.example.API.REST.FORUM.Model.Message;
 import com.example.API.REST.FORUM.Repository.ForumRepository;
 import com.example.API.REST.FORUM.Services.ForumService;
+import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

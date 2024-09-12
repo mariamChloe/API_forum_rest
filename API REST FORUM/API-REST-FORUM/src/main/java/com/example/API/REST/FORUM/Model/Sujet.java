@@ -26,7 +26,7 @@ public class Sujet {
     private Forum forum;
 
 
-    @OneToMany(mappedBy = "sujet")
+    @OneToMany(mappedBy = "sujet",fetch = FetchType.EAGER)
     private Set<Message> messages;
 
 }

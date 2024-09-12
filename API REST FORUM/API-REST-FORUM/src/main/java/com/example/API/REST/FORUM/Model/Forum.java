@@ -31,7 +31,7 @@ public class Forum {
     private Instant date;
 
 
-    @OneToMany(mappedBy = "forum")
+    @OneToMany(mappedBy = "forum",fetch = FetchType.EAGER)
     private Set<Sujet>sujets;
 
 }
