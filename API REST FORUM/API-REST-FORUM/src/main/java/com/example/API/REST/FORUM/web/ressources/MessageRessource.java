@@ -5,6 +5,7 @@ import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.dto.MessageDTO;
 import com.example.API.REST.FORUM.Services.MessageService;
 import com.example.API.REST.FORUM.Services.dto.SujetDTO;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,8 @@ public class MessageRessource {
         if (sujetDTO.isPresent()) {
             messageDTO.setSujet(sujetDTO.get()); // Associer le sujet au message
             messageDTO.setDate(Instant.now());
+            String slug = SlugifyUtils.generated(messageDTO.getDate().toString());
+            messageDTO.setSlug(slug);
             MessageDTO message = messageService.save(messageDTO);
             return new ResponseEntity<>(message, HttpStatus.CREATED);
         } else {

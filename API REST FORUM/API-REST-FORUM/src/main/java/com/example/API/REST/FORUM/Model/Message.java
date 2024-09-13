@@ -25,8 +25,11 @@ public class Message implements Serializable {
     @Column(name = "date", nullable = false)
     private Instant date;
 
+    @Column(name = "slug", unique = true)
+    private String slug;
+
     @ManyToOne
-    @JoinColumn(name = "sujet_id", nullable = false) // Clé étrangère
+    @JoinColumn(name = "sujet_id") // Clé étrangère
     private Suject sujet;
 
 

@@ -5,6 +5,7 @@ import com.example.API.REST.FORUM.Repository.SujetRepository;
 import com.example.API.REST.FORUM.Services.dto.SujetDTO;
 import com.example.API.REST.FORUM.Services.Mapper.SujetMapper;
 import com.example.API.REST.FORUM.Services.SujetService;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,8 @@ public class SujeServicetImpl implements SujetService {
     public SujetDTO save(SujetDTO sujetDTO) {
         log.debug("Resqurst to save : {}",sujetDTO);
         Suject sujet = sujetMapper.toEntity(sujetDTO);
+        String slug = SlugifyUtils.generated(sujet.getTheme().toString());
+        sujet.setSlug(slug);
         sujet= sujetRepository.save(sujet);
 
         return  sujetMapper.fromEntity(sujet);

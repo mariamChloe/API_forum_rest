@@ -75,7 +75,5 @@ public class ApiRestForumApplication implements CommandLineRunner {
 		message1.setSujet(savedSujet1);  // Utiliser le Sujet déjà sauvegardé
 		messageService.save(message1);  // Message persisté en base de données
 
-
-
 	}
 }

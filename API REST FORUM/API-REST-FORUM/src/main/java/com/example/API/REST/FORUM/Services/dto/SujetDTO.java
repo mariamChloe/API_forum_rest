@@ -13,6 +13,8 @@ public class SujetDTO {
 
     private String theme;
 
+    private String slug;
+
     private ForumDTO forum;
 
 }

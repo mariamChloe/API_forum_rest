@@ -27,8 +27,11 @@ public class Forum implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "date",nullable = false)
+    @Column(name = "date", nullable = false)
     private Instant date;
+
+    @Column(name = "slug", unique = true)
+    private String slug;
 
 
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

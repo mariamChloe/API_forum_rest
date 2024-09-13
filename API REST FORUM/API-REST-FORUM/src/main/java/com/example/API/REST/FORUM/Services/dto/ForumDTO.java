@@ -18,5 +18,7 @@ public class ForumDTO {
 
     private Instant date;
 
+    private String slug;
+
 
 }

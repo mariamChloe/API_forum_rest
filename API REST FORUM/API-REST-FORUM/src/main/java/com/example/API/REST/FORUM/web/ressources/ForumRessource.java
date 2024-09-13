@@ -5,6 +5,7 @@ import com.example.API.REST.FORUM.Repository.ForumRepository;
 import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,8 @@ public class ForumRessource {
         log.debug("Request to save : {}", forumDTO);
         try {
             Forum forum = forumMapper.toEntity(forumDTO);
+            String slug = SlugifyUtils.generated(forumDTO.getNom().toString());
+            forum.setSlug(slug);
             forum.setDate(Instant.now()); // Insérer automatiquement la date
             forum = forumRepository.save(forum);
             return forumMapper.fromEntity(forum);

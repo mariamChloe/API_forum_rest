@@ -2,9 +2,10 @@ package com.example.API.REST.FORUM.Services.Impl;
 
 import com.example.API.REST.FORUM.Model.Message;
 import com.example.API.REST.FORUM.Repository.MessageRepository;
-import com.example.API.REST.FORUM.Services.dto.MessageDTO;
 import com.example.API.REST.FORUM.Services.Mapper.MessageMapper;
+import com.example.API.REST.FORUM.Services.dto.MessageDTO;
 import com.example.API.REST.FORUM.Services.MessageService;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class MessageServiceImpl implements MessageService {
     public MessageDTO save(MessageDTO messageDTO) {
         log.debug("Resqurst to save : {}",messageDTO);
         Message message = messageMapper.toEntity(messageDTO);
+        String slug = SlugifyUtils.generated(message.getDate().toString());
+        message.setSlug(slug);
         message= messageRepository.save(message);
 
         return  messageMapper.fromEntity(message);

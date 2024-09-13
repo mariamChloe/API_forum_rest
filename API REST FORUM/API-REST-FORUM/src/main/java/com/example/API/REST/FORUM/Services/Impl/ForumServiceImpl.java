@@ -2,9 +2,10 @@ package com.example.API.REST.FORUM.Services.Impl;
 
 import com.example.API.REST.FORUM.Model.Forum;
 import com.example.API.REST.FORUM.Repository.ForumRepository;
+import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
-import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class ForumServiceImpl implements ForumService {
         log.debug("Request to save : {}", forumDTO);
         try {
             Forum forum = forumMapper.toEntity(forumDTO);
+            String slug = SlugifyUtils.generated(forumDTO.getNom().toString());
+            forum.setSlug(slug);
             forum = forumRepository.save(forum);
             return forumMapper.fromEntity(forum);
         } catch (Exception e) {

@@ -23,8 +23,11 @@ public class Suject implements Serializable {
     private String theme;
 
     @ManyToOne
-    @JoinColumn(name = "forum_id", nullable = false) // Clé étrangère
+    @JoinColumn(name = "forum_id") // Clé étrangère
     private Forum forum;
+
+    @Column(name = "slug", unique = true)
+    private String slug;
 
 
     @OneToMany(mappedBy = "sujet", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

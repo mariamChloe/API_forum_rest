@@ -4,6 +4,7 @@ import com.example.API.REST.FORUM.Services.ForumService;
 import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.dto.SujetDTO;
 import com.example.API.REST.FORUM.Services.SujetService;
+import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,8 @@ public class SujetRessource {
         Optional<ForumDTO> forumDTO = forumService.findOne(forumId);
         if (forumDTO.isPresent()) {
             sujetDTO.setForum(forumDTO.get()); // Associer le forum au sujet
+            String slug = SlugifyUtils.generated(sujetDTO.getTheme().toString());
+            sujetDTO.setSlug(slug);
             SujetDTO sujet = sujetService.save(sujetDTO);
             return new ResponseEntity<>(sujet, HttpStatus.CREATED);
         } else {
