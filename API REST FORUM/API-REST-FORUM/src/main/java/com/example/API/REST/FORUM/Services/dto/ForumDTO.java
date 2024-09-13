@@ -1,6 +1,5 @@
-package com.example.API.REST.FORUM.Services.DTO;
+package com.example.API.REST.FORUM.Services.dto;
 
-import com.example.API.REST.FORUM.Model.Sujet;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,7 +18,5 @@ public class ForumDTO {
 
     private Instant date;
 
-
-    private Set<SujetDTO> sujets;
 
 }

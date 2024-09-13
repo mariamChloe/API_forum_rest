@@ -1,6 +1,6 @@
 package com.example.API.REST.FORUM.Services;
 
-import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
+import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 
 import java.util.List;
 import java.util.Optional;

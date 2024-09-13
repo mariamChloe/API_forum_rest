@@ -1,8 +1,9 @@
-package com.example.API.REST.FORUM.Services.DTO;
+package com.example.API.REST.FORUM.Services.dto;
 
-import com.example.API.REST.FORUM.Model.Sujet;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -12,8 +13,7 @@ public class MessageDTO {
 
     private String contenu;
 
-    private String date;
-
+    private Instant date;
 
     private SujetDTO sujet;
 

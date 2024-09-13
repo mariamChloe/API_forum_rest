@@ -1,7 +1,5 @@
-package com.example.API.REST.FORUM.Services.DTO;
+package com.example.API.REST.FORUM.Services.dto;
 
-import com.example.API.REST.FORUM.Model.Forum;
-import com.example.API.REST.FORUM.Model.Message;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,8 +13,6 @@ public class SujetDTO {
 
     private String theme;
 
-
     private ForumDTO forum;
 
-    private Set<MessageDTO> messages;
 }

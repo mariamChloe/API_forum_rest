@@ -1,15 +1,19 @@
 package com.example.API.REST.FORUM.web.ressources;
 
-import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
+import com.example.API.REST.FORUM.Model.Forum;
+import com.example.API.REST.FORUM.Repository.ForumRepository;
+import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
+import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,12 +22,39 @@ import org.springframework.web.bind.annotation.RestController;
 public class ForumRessource {
 
     private final ForumService forumService;
+    private final ForumMapper forumMapper;
+    private final ForumRepository forumRepository;
 
     @PostMapping
-    public ResponseEntity<ForumDTO> save(@RequestBody ForumDTO forumDTO){
-        log.debug(" REST Request to save forum {}",forumDTO);
-        ForumDTO forum = forumService.save(forumDTO);
-        return new ResponseEntity<>(forum, HttpStatus.CREATED);
+    public ForumDTO save(@RequestBody ForumDTO forumDTO){
+        log.debug("Request to save : {}", forumDTO);
+        try {
+            Forum forum = forumMapper.toEntity(forumDTO);
+            forum.setDate(Instant.now()); // Insérer automatiquement la date
+            forum = forumRepository.save(forum);
+            return forumMapper.fromEntity(forum);
+        } catch (Exception e) {
+            log.error("Error while saving forum: ", e);
+            throw new RuntimeException("Failed to save forum", e);
+        }
     }
+
+    @GetMapping
+    public List<ForumDTO> getAllforum(){
+        log.debug("REST Request to all forum ");
+        return forumService.getAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getforum(@PathVariable Long id){
+        log.debug(" REST Request to get one  ");
+        Optional<ForumDTO> forumDTO = forumService.findOne(id);
+        if (forumDTO.isPresent()) {
+            return new ResponseEntity<>(forumDTO.get(), HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("Forum not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 
 }

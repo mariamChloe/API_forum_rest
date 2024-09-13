@@ -2,7 +2,7 @@ package com.example.API.REST.FORUM.Services.Impl;
 
 import com.example.API.REST.FORUM.Model.Forum;
 import com.example.API.REST.FORUM.Repository.ForumRepository;
-import com.example.API.REST.FORUM.Services.DTO.ForumDTO;
+import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
 import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import lombok.RequiredArgsConstructor;
@@ -14,27 +14,37 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ForumImpl implements ForumService {
+public class ForumServiceImpl implements ForumService {
 
     private final ForumRepository forumRepository;
     private final ForumMapper forumMapper;
 
     @Override
     public ForumDTO save(ForumDTO forumDTO) {
-        log.debug("Resqurst to save : {}",forumDTO);
-        Forum forum = forumMapper.toEntity(forumDTO);
-        forum= forumRepository.save(forum);
-
-        return  forumMapper.fromEntity(forum);
+        log.debug("Request to save : {}", forumDTO);
+        try {
+            Forum forum = forumMapper.toEntity(forumDTO);
+            forum = forumRepository.save(forum);
+            return forumMapper.fromEntity(forum);
+        } catch (Exception e) {
+            log.error("Error while saving forum: ", e);
+            throw new RuntimeException("Failed to save forum", e);
+        }
     }
+
 
     @Override
     public List<ForumDTO> getAll() {
-        return null;
+        log.debug("Request to getAll forum");
+        return forumRepository.findAll().stream()
+                .map(forumMapper::fromEntity)
+                .toList();
     }
 
     @Override
     public Optional<ForumDTO> findOne(Long id) {
-        return Optional.empty();
+        return forumRepository.findById(id)
+                .map(forumMapper::fromEntity);
     }
+
 }
