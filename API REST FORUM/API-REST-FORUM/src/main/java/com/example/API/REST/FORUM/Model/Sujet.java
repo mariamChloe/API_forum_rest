@@ -3,6 +3,7 @@ package com.example.API.REST.FORUM.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Getter
@@ -12,13 +13,13 @@ import java.util.Set;
 @ToString
 @Builder
 @Entity
-@Table(name = "Sujet")
-public class Sujet {
+@Table(name = "sujet")
+public class Sujet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Theme")
+    @Column(name = "theme",nullable = false)
     private String theme;
 
     @ManyToOne

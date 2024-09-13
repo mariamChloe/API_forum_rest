@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.engine.internal.Cascade;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.Set;
 
@@ -14,20 +15,20 @@ import java.util.Set;
 @ToString
 @Builder
 @Entity
-@Table(name = "Forum")
-public class Forum {
+@Table(name = "forum")
+public class Forum implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Nom")
+    @Column(name = "nom",nullable = false)
     private String nom;
 
-    @Column(name = "Description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "Date")
+    @Column(name = "date")
     private Instant date;
 
 
