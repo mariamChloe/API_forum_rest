@@ -5,9 +5,9 @@ Cette API REST permet de gérer un forum de discussion avec des utilisateurs, de
 
 ## Prérequis
 Avant d'installer et d'utiliser l'API, vous devez avoir installé :
-- Java 11+
+- Java 17
 - Maven
-- MySQL
+- POSTGRESQL
 
 ## Installation
 
