@@ -26,3 +26,4 @@ Les contributions sont les bienvenues ! Pour contribuer :
 
 ## Utilisation DE L'API
 L'API fournit les points de terminaison que vous trouverez dans la publication postman suivante :
+https://documenter.getpostman.com/view/38214536/2sAXqngk6W
