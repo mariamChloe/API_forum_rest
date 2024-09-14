@@ -1,10 +1,9 @@
 package com.example.API.REST.FORUM.web.ressources;
 
-import com.example.API.REST.FORUM.Services.SujetService;
-import com.example.API.REST.FORUM.Services.dto.ForumDTO;
+import com.example.API.REST.FORUM.Services.SubjectService;
 import com.example.API.REST.FORUM.Services.dto.MessageDTO;
 import com.example.API.REST.FORUM.Services.MessageService;
-import com.example.API.REST.FORUM.Services.dto.SujetDTO;
+import com.example.API.REST.FORUM.Services.dto.SubjectDTO;
 import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,15 +19,15 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/messages")
-public class MessageRessource {
+public class MessageResource {
 
     private final MessageService messageService;
-    private final SujetService sujetService;
+    private final SubjectService sujetService;
 
     @PostMapping("/{sujetId}")
     public ResponseEntity<MessageDTO> save(@PathVariable Long sujetId, @RequestBody MessageDTO messageDTO) {
         log.debug("REST Request to save sujet {} in forum {}", messageDTO, sujetId);
-        Optional<SujetDTO> sujetDTO = sujetService.findOne(sujetId);
+        Optional<SubjectDTO> sujetDTO = sujetService.findOne(sujetId);
         if (sujetDTO.isPresent()) {
             messageDTO.setSujet(sujetDTO.get()); // Associer le sujet au message
             messageDTO.setDate(Instant.now());

@@ -1,7 +1,7 @@
 package com.example.API.REST.FORUM.Services.Impl;
 
 import com.example.API.REST.FORUM.Model.Message;
-import com.example.API.REST.FORUM.Repository.MessageRepository;
+import com.example.API.REST.FORUM.Repositories.MessageRepository;
 import com.example.API.REST.FORUM.Services.Mapper.MessageMapper;
 import com.example.API.REST.FORUM.Services.dto.MessageDTO;
 import com.example.API.REST.FORUM.Services.MessageService;

@@ -1,10 +1,10 @@
 package com.example.API.REST.FORUM.Services.Impl;
 
-import com.example.API.REST.FORUM.Model.Suject;
-import com.example.API.REST.FORUM.Repository.SujetRepository;
-import com.example.API.REST.FORUM.Services.dto.SujetDTO;
-import com.example.API.REST.FORUM.Services.Mapper.SujetMapper;
-import com.example.API.REST.FORUM.Services.SujetService;
+import com.example.API.REST.FORUM.Model.Subject;
+import com.example.API.REST.FORUM.Repositories.SubjectRepository;
+import com.example.API.REST.FORUM.Services.dto.SubjectDTO;
+import com.example.API.REST.FORUM.Services.Mapper.SubjectMapper;
+import com.example.API.REST.FORUM.Services.SubjectService;
 import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,15 +15,15 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SujeServicetImpl implements SujetService {
+public class SubjectServicetImpl implements SubjectService {
 
-    private final SujetRepository sujetRepository;
-    private final SujetMapper sujetMapper;
+    private final SubjectRepository sujetRepository;
+    private final SubjectMapper sujetMapper;
 
     @Override
-    public SujetDTO save(SujetDTO sujetDTO) {
+    public SubjectDTO save(SubjectDTO sujetDTO) {
         log.debug("Resqurst to save : {}",sujetDTO);
-        Suject sujet = sujetMapper.toEntity(sujetDTO);
+        Subject sujet = sujetMapper.toEntity(sujetDTO);
         String slug = SlugifyUtils.generated(sujet.getTheme().toString());
         sujet.setSlug(slug);
         sujet= sujetRepository.save(sujet);
@@ -32,7 +32,7 @@ public class SujeServicetImpl implements SujetService {
     }
 
     @Override
-    public List<SujetDTO> getAll() {
+    public List<SubjectDTO> getAll() {
         log.debug("Resqurst to save get all suject");
         return sujetRepository.findAll().stream().map(sujet -> {
             return sujetMapper.fromEntity(sujet);
@@ -40,7 +40,7 @@ public class SujeServicetImpl implements SujetService {
     }
 
     @Override
-    public Optional<SujetDTO> findOne(Long id) {
+    public Optional<SubjectDTO> findOne(Long id) {
         log.debug("Resqurst to save get one {}",id);
         return sujetRepository.findById(id).map(sujet -> {
             return sujetMapper.fromEntity(sujet);

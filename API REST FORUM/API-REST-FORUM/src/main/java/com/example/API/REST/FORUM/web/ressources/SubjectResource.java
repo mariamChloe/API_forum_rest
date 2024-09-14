@@ -2,8 +2,8 @@ package com.example.API.REST.FORUM.web.ressources;
 
 import com.example.API.REST.FORUM.Services.ForumService;
 import com.example.API.REST.FORUM.Services.dto.ForumDTO;
-import com.example.API.REST.FORUM.Services.dto.SujetDTO;
-import com.example.API.REST.FORUM.Services.SujetService;
+import com.example.API.REST.FORUM.Services.dto.SubjectDTO;
+import com.example.API.REST.FORUM.Services.SubjectService;
 import com.example.API.REST.FORUM.utils.SlugifyUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,20 +18,20 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/sujets")
-public class SujetRessource {
+public class SubjectResource {
 
-    private final SujetService sujetService;
+    private final SubjectService sujetService;
     private final ForumService forumService;
 
     @PostMapping("/{forumId}")
-    public ResponseEntity<SujetDTO> save(@PathVariable Long forumId, @RequestBody SujetDTO sujetDTO) {
+    public ResponseEntity<SubjectDTO> save(@PathVariable Long forumId, @RequestBody SubjectDTO sujetDTO) {
         log.debug("REST Request to save sujet {} in forum {}", sujetDTO, forumId);
         Optional<ForumDTO> forumDTO = forumService.findOne(forumId);
         if (forumDTO.isPresent()) {
             sujetDTO.setForum(forumDTO.get()); // Associer le forum au sujet
             String slug = SlugifyUtils.generated(sujetDTO.getTheme().toString());
             sujetDTO.setSlug(slug);
-            SujetDTO sujet = sujetService.save(sujetDTO);
+            SubjectDTO sujet = sujetService.save(sujetDTO);
             return new ResponseEntity<>(sujet, HttpStatus.CREATED);
         } else {
             return null; // Ce bloc est correct ici
@@ -40,7 +40,7 @@ public class SujetRessource {
 
 
     @GetMapping
-    public List<SujetDTO> getAllSujet(){
+    public List<SubjectDTO> getAllSujet(){
         log.debug("REST Request to all Sujet ");
         return sujetService.getAll();
     }
@@ -48,7 +48,7 @@ public class SujetRessource {
     @GetMapping("/{id}")
     public ResponseEntity<?> getSujet(@PathVariable Long id){
         log.debug(" REST Request to get one  ");
-        Optional<SujetDTO> sujetDTO = sujetService.findOne(id);
+        Optional<SubjectDTO> sujetDTO = sujetService.findOne(id);
         if (sujetDTO.isPresent()) {
             return new ResponseEntity<>(sujetDTO.get(), HttpStatus.OK);
         }else {

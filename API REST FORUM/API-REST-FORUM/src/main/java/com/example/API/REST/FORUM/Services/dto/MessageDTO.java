@@ -17,6 +17,6 @@ public class MessageDTO {
 
     private String slug;
 
-    private SujetDTO sujet;
+    private SubjectDTO sujet;
 
 }

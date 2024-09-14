@@ -35,7 +35,7 @@ public class Forum implements Serializable {
 
 
     @OneToMany(mappedBy = "forum", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Suject> sujets;
+    private Set<Subject> sujets;
 
 
 }

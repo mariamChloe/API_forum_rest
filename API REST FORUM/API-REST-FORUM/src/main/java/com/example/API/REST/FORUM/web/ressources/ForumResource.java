@@ -1,7 +1,7 @@
 package com.example.API.REST.FORUM.web.ressources;
 
 import com.example.API.REST.FORUM.Model.Forum;
-import com.example.API.REST.FORUM.Repository.ForumRepository;
+import com.example.API.REST.FORUM.Repositories.ForumRepository;
 import com.example.API.REST.FORUM.Services.Mapper.ForumMapper;
 import com.example.API.REST.FORUM.Services.dto.ForumDTO;
 import com.example.API.REST.FORUM.Services.ForumService;
@@ -20,7 +20,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api/forums")
-public class ForumRessource {
+public class ForumResource {
 
     private final ForumService forumService;
     private final ForumMapper forumMapper;

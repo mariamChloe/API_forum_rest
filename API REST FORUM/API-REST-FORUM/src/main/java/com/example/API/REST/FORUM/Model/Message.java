@@ -30,7 +30,7 @@ public class Message implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "sujet_id") // Clé étrangère
-    private Suject sujet;
+    private Subject sujet;
 
 
 }
